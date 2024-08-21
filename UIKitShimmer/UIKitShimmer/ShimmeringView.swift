@@ -16,8 +16,17 @@ class ShimmeringView: UIView {
     }
     
     private func setupShimmeringEffect() {
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
+        backgroundColor = .clear
+        
+        gradientLayer.colors = [
+            UIColor(white: 1, alpha: 0.3).cgColor, // Slightly tinted clear
+            UIColor(white: 1, alpha: 0.4).cgColor,  // Less intense white
+            UIColor(white: 1, alpha: 0.3).cgColor  // Slightly tinted clear
+         ]
+//        gradientLayer.locations = [0, 0.5, 1]
         gradientLayer.locations = [0, 0.5, 1]
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.frame = bounds
