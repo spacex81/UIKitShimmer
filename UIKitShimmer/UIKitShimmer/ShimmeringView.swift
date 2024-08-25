@@ -6,6 +6,23 @@ class ShimmeringView: UIView {
     private let animation = CABasicAnimation(keyPath: "locations")
     private let textLayer = CATextLayer()
 
+    var text: String = "Connecting..." {
+        didSet {
+            textLayer.string = text
+        }
+    }
+    var font: UIFont = UIFont.systemFont(ofSize: 32) {
+        didSet {
+            textLayer.font = font
+            textLayer.fontSize = font.pointSize
+        }
+    }
+    var fontSize: CGFloat = 32 {
+        didSet {
+            textLayer.fontSize = fontSize
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupShimmeringEffect()
@@ -40,9 +57,9 @@ class ShimmeringView: UIView {
         gradientLayer.add(animation, forKey: "shimmerAnimation")
         
         // Configure textLayer
-        textLayer.string = "Connecting..."
-        textLayer.font = UIFont.systemFont(ofSize: 32)
-        textLayer.fontSize = 32
+        textLayer.string = text
+        textLayer.font = font
+        textLayer.fontSize = fontSize
         textLayer.alignmentMode = .center
         textLayer.contentsScale = UIScreen.main.scale
         textLayer.frame = bounds
@@ -56,6 +73,15 @@ class ShimmeringView: UIView {
         maskLayer.addSublayer(textLayer)
         
         gradientLayer.mask = maskLayer
+    }
+    
+    func configure(text: String, font: UIFont, fontSize: CGFloat) {
+        self.text = text
+        self.font = font
+        self.fontSize = fontSize
+        textLayer.string = text
+        textLayer.font = font
+        textLayer.fontSize = fontSize
     }
     
     override func layoutSubviews() {

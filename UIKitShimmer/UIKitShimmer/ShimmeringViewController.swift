@@ -23,4 +23,8 @@ class ShimmeringViewController: UIViewController {
             shimmeringView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    func configure(with text: String, font: UIFont, fontSize: CGFloat) {
+        shimmeringView.configure(text: text, font: font, fontSize: fontSize)
+    }
 }
